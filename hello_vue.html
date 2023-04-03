@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Vue</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://unpkg.com/vue@next"></script>
+    </head>
+    <body>
+    <main>
+        <div id="hello">
+            <h1>Hello Vue</h1>
+            <p>
+                {{message_with_exclam}}
+            </p>
+            <button v-on:click="addExclam">Add !</button>
+            <button v-on:click="clear">Clear !</button>
+        </div>
+    </main>
+    <script>
+        let app=Vue.createApp({
+            data(){
+                return{
+                    message:'hi',
+                    num_exclam:0
+                }
+            },
+            methods: {
+                addExclam() {
+                    if (this.num_exclam<10) {
+                        this.num_exclam++
+                    }
+                    else {
+                        alert("no more ! :)")
+                    }
+                },
+                clear() {
+                    this.num_exclam=0
+                }
+            },
+            computed: {
+                message_with_exclam() {
+                    let message_new=this.message
+                    for (let x=0; x<this.num_exclam; x++) {
+                        message_new=message_new+"!"
+                    }
+                    return message_new
+                }
+            }
+        })
+        app.mount('#hello')
+    </script>
+    </body>
+</html>

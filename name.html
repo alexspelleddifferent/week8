@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name Entry with Vue</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    </head>
+    <body>
+    <main>
+        <div id="app">
+            <h1>Hello Vue</h1>
+            <label for="name">Please enter your name: </label>
+            <input v-model="name" id="name">
+            <p v-if="name"> Your name is {{name}}</p> 
+            <p v-else>Waiting for input</p>
+            <button v-if="name" v-on:click="clear">Clear Input</button>
+        </div>
+        <script>
+            let app=Vue.createApp({
+                data() {
+                    return {
+                    name: ''
+                    }
+                },
+                methods: {
+                    clear() {
+                        this.name=''
+                        }
+                }
+            })
+            app.mount('#app')
+        </script>
+    </main>
+    </body>
+</html>
