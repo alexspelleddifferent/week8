@@ -21,14 +21,62 @@
                 </tr>
                 <tr>
                     <td>{{name}}</td>
-                    <td>${{price}}</td>
+                    <td>${{unitPrice}}</td>
                     <td>
-                        <input type="number" name="quantity" v-model="quantity">
+                        <input type="number" name="quantity" v-model.number="quantity">
+                        <div class="error-message" v-if="quantityError">{{quantityError}}</div>
                     </td>
-                    <td> </td>
+                    <td>
+                        <div v-if="quantityError">
+                            Invalid quantity
+                        </div> 
+                        <div v-else>
+                            ${{total}}
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>
     </main>
     </body>
+    <script>
+        let app=Vue.createApp({
+            data() {
+                return {
+                    name:'Hat',
+                    quantity: 1,
+                    unitPrice: 4.99,
+                    maxQuantity: 20,
+                    quantityError: ''
+                }
+            },
+            computed: {
+                total() {
+                    if (!Number.isInteger(this.quantity)){
+                        this.quantityError = 'Quantity must be a number'
+                    }
+                    else if (this.quantity <0 || this.quantity>this.maxQuantity) {
+                        this.quantityError = 'Quantity must be between 0 and 20'
+                    }
+                    else {
+                        this.quantityError = ''
+                        let totalPrice=this.quantity * this.unitPrice
+                        let Price_fixed=totalPrice.toFixed(2)
+                        return Price_fixed
+                    }
+                }
+            }
+        })
+        app.mount('#app')
+    </script>
+    <style>
+        td, th {
+            width: 25%;
+            text-align: center
+        }
+
+        .error-message {
+            color: red;
+        }
+    </style>
 </html>

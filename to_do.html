@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>To Do list</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <script src="https://unpkg.com/vue@next"></script>
+        </head>
+    <body>
+        <div id="app">
+            <h1>Vue Loops</h1> 
+            <label for="task">Please enter your to-do task: </label>
+            <input v-model="newTask" id="task">
+            <button v-on:click="addTask">Add Task</button>
+            <h2>Your task list</h2>
+            <ul>
+                <li v-for="task in taskList">{{task}}</li>
+            </ul>
+        </div>
+    <script>
+        let app=Vue.createApp({
+            data() {
+                return {
+                    newTask:'',
+                    taskList:[]
+                }
+            },
+            methods: {
+                addTask() {
+                    if (this.newTask) {
+                        this.taskList.push(this.newTask)
+                        this.newTask=''
+                    }
+                }
+            }
+        })
+        app.mount('#app')
+    </script>
+    </body>
+</html>

@@ -1,0 +1,5 @@
+This message means that there was some element of vue code that attempted to access an //
+attribute of an object but that attribute does not exist yet. You can ignore it in the //
+sense that your web page won't necessarily break but it means it likely will not do what //
+you want it to do. You can fix this by making sure that whatever attribute/property is //
+being requested actually exists, either in the data or in the computation part of a vue object.
